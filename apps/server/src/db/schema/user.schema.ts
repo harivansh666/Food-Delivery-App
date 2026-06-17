@@ -5,6 +5,7 @@ import { pgEnum, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 export const UserRole = pgEnum('user_role', [
   'CUSTOMER',
   'RESTAURANT_OWNER',
+  'DELIVERYMAN',
   'ADMIN',
 ]);
 
@@ -20,4 +21,5 @@ export const user = pgTable('users', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
+export type User = typeof user.$inferSelect;
 export type UserType = typeof user.$inferInsert;
