@@ -1,8 +1,8 @@
+import { AuthProvider } from "@/context/auth-context";
 import "../global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { AnimatedSplashOverlay } from "@/components/animated-icon";
-import AppTabs from "@/components/app-tabs";
+import { Stack } from "expo-router";
 
 export default function TabLayout() {
   // create client
@@ -10,8 +10,13 @@ export default function TabLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
+      <AuthProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+          <Stack.Screen name="register" options={{ headerShown: false }} />
+        </Stack>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
