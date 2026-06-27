@@ -1,39 +1,24 @@
-import { useRouter } from "expo-router";
-import axiosInstance from "@/lib/axios";
-import { useQuery } from "@tanstack/react-query";
-import { HealthCheckResponse } from "@food-delivery-app/types";
-import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
+import { Redirect } from "expo-router";
+import { useAuth } from "@/context/auth-context";
 
 function Home() {
-  const router = useRouter();
+  const { user, isLoading } = useAuth();
 
-  const { data, isLoading, error } = useQuery<HealthCheckResponse>({
-    queryKey: ["health"],
-    queryFn: async (): Promise<HealthCheckResponse> => {
-      const response = await axiosInstance.get("/");
-      return response.data;
-    },
-  });
+  if (isLoading) return null;
 
-  return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="text-2xl font-bold text-pink-500">Food Delivery</Text>
+  if (!user) return <Redirect href="/login" />;
 
-      {isLoading && <ActivityIndicator size="large" color="#ec4899" />}
-      {error && (
-        <Text className="text-red-500 mt-4">Error: {error.message}</Text>
-      )}
-      {data && <Text className="text-green-500 mt-4">{data.status}</Text>}
+  if (user.role === "CUSTOMER") return <Redirect href={"/customer" as any} />;
+  if (user.role === "ADMIN") return <Redirect href={"/admin" as any} />;
+  if (user.role === "DELIVERYMAN")
+    return <Redirect href={"/deliveryman" as any} />;
+  if (user.role === "RESTAURANT_OWNER")
+    return <Redirect href={"/restaurant" as any} />;
 
-      {/* Login button */}
-      <TouchableOpacity
-        className="mt-8 bg-blue-500 px-6 py-3 rounded-lg w-30 h-30 bg-orange-600 "
-        onPress={() => router.push("/login")}
-      >
-        <Text className="text-white font-bold">Go to Login</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  // Fallback
+  return <Redirect href="/login" />;
 }
 
 export default Home;
+
+// ye file User ko sahi route pe redirect karti hai
