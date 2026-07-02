@@ -1,14 +1,18 @@
+import { COLORS } from "@/constants/constants";
 import { Colors } from "@/constants/theme";
 import { useAuth } from "@/context/auth-context";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function CustomerHome() {
+export default function Profile() {
   const { user, logout } = useAuth();
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🍔 Welcome, {user?.name}!</Text>
       <Text style={styles.subtitle}>Explore restaurants & order food</Text>
+
+      <TouchableOpacity style={styles.button} onPress={logout}>
+        <Text style={styles.buttonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   button: {
-    backgroundColor: Colors.light.backgroundElement,
+    backgroundColor: "#ea580c",
     paddingHorizontal: 32,
     paddingVertical: 14,
     borderRadius: 12,

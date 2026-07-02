@@ -23,7 +23,14 @@ interface RegisterDto {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>({
+    email: "rider@gmail.com",
+    id: "1",
+    name: "Harivansh",
+    role: "DELIVERYMAN",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
 
