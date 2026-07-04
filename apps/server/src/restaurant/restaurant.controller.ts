@@ -23,6 +23,7 @@ type AuthRequest = Request & { user: JwtPayload };
 @UseGuards(AuthGuard)
 export class RestaurantController {
   constructor(private readonly restaurantService: RestaurantService) {}
+
   @Post('create')
   @UseGuards(RolesGuard)
   @Roles(UserRole.RESTAURANT_OWNER)
@@ -35,16 +36,20 @@ export class RestaurantController {
   async getMine(@Request() req: AuthRequest) {
     return await this.restaurantService.findMine(req.user.id);
   }
+
+  @Get(':id')
+  @UseGuards(AuthGuard)
   async findById(id: string) {
     return await this.restaurantService.findById(id);
   }
+
   @Get('search')
   @UseGuards(AuthGuard)
   async findAll(@Query('search') search: string) {
     return await this.restaurantService.findAll(search);
   }
 
-  @Patch()
+  @Patch(':id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.RESTAURANT_OWNER)
   async update(
