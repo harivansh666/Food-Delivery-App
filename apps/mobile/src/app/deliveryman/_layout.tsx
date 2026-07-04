@@ -37,14 +37,24 @@ export default function CustomerLayout() {
       />
 
       <Tabs.Screen
-        name="analytics"
+        name="earnings"
         options={{
-          title: "Analytics",
+          title: "Earnings",
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="analytics" size={size} color={color} />
+            <MaterialIcons name="attach-money" size={size} color={color} />
           ),
         }}
       />
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: "History",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="history" size={size} color={color} />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="profile"
         options={{
