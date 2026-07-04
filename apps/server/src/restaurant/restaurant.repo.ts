@@ -73,6 +73,15 @@ export class RestaurantRepository {
       );
   }
   async updateRestaurant(id: string, ownerId: string, data: any) {
+    const restaurant = await this.db
+      .select()
+      .from(schema.restaurants)
+      .where(eq(schema.restaurants.id, id))
+      .limit(1);
+
+    if (restaurant.length === 0)
+      throw new NotFoundException('No restaurant found');
+
     return await this.db
       .update(schema.restaurants)
       .set(data)
