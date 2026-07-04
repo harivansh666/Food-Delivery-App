@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
+import { RestaurantController } from './restaurant/restaurant.controller';
+import { RestaurantService } from './restaurant/restaurant.service';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     UserModule,
   ], // AppModule ko chalane se pehle ConfigModule aur DbModule ko initialize karo.
-  controllers: [AppController, AuthController, UserController],
-  providers: [AppService, AuthService, UserService],
+  controllers: [AppController, AuthController, UserController, RestaurantController],
+  providers: [AppService, AuthService, UserService, RestaurantService],
 })
 export class AppModule {}

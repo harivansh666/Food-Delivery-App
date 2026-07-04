@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { createRouteHandler } from 'uploadthing/express';
+import { uploadRouter } from './uploadthing/upload-router';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +15,14 @@ async function bootstrap() {
       whitelist: true, // agar user kush extra fields send krega to remove ho jyegi
       forbidNonWhitelisted: true, // agar user kush extra fields send krega to error dega
       transform: true,
+    }),
+  );
+
+  app.use(
+    '/api/uploadthing',
+    createRouteHandler({
+      router: uploadRouter,
+      config: { token: process.env.UPLOADTHING_API_KEY! },
     }),
   );
   const port = process.env.PORT;
