@@ -23,7 +23,7 @@ export const restaurants = pgTable('restaurants', {
   email: varchar('email', { length: 255 }).unique().notNull(),
   logo: text('logo'),
   coverImage: text('cover_image'),
-  rating: RatingEnum('rating'),
+  rating: RatingEnum('rating').default('1').notNull(),
   cuisineType: varchar('cuisine_type', { length: 255 }).notNull(),
   isOpen: boolean('is_open').default(false).notNull(),
   isVerified: boolean('is_verified').default(false).notNull(),
