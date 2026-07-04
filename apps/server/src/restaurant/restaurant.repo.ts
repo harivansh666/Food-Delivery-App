@@ -72,7 +72,11 @@ export class RestaurantRepository {
         ),
       );
   }
-  async updateRestaurant(id: string, ownerId: string, data: any) {
+  async updateRestaurant(
+    id: string,
+    ownerId: string,
+    data: schema.RestaurantType,
+  ) {
     const restaurant = await this.db
       .select()
       .from(schema.restaurants)
@@ -82,9 +86,12 @@ export class RestaurantRepository {
     if (restaurant.length === 0)
       throw new NotFoundException('No restaurant found');
 
+    if (ownerId !== restaurant[0].ownerId)
+      throw new ForbiddenException('You are not the owner of this restaurant');
+
     return await this.db
       .update(schema.restaurants)
-      .set(data)
+      .set({ ...data, updatedAt: new Date() })
       .where(
         and(
           eq(schema.restaurants.id, id),
