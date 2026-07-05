@@ -4,9 +4,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function AdminLayout() {
   return (
     <>
-      <Stack.Screen name="create-restaurant" options={{ headerShown: false }} />
-      <Stack.Screen name="edit-restaurant" options={{ headerShown: false }} />
-
       <Tabs
         screenOptions={{
           headerShown: false,

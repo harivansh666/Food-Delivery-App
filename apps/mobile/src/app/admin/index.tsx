@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useAuth } from "@/context/auth-context";
+import { Link } from "expo-router";
 
 export default function AdminHomeScreen() {
   const { user, logout } = useAuth();
@@ -10,9 +11,10 @@ export default function AdminHomeScreen() {
 
       <Text style={styles.subtitle}>Welcome {user?.name ?? "Admin"}</Text>
 
-      <Pressable style={styles.button} onPress={logout}>
-        <Text style={styles.buttonText}>Logout</Text>
-      </Pressable>
+      <Link
+        style={styles.createRestaurant}
+        href={"/admin/(index)/create-restaurant"}
+      />
     </View>
   );
 }
@@ -49,5 +51,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
     fontSize: 16,
+  },
+  createRestaurant: {
+    height: 30,
+    width: 90,
+    backgroundColor: "#FF0000",
+    borderRadius: 20,
   },
 });

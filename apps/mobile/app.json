@@ -20,6 +20,9 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.harivansh.mobile"
     },
+    "experiments": {
+      "typedRoutes": true
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
