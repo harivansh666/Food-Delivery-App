@@ -12,8 +12,6 @@ function Home() {
   if (user.role === "ADMIN") return <Redirect href={"/admin" as any} />;
   if (user.role === "DELIVERYMAN")
     return <Redirect href={"/deliveryman" as any} />;
-  if (user.role === "RESTAURANT_OWNER")
-    return <Redirect href={"/restaurant" as any} />;
 
   // Fallback
   return <Redirect href="/login" />;

@@ -21,16 +21,12 @@ function InnerLayout() {
           <Stack.Screen name="customer" options={{ headerShown: false }} />
         </Stack.Protected>
 
-        <Stack.Protected guard={user.role === "ADMIN"}>
-          <Stack.Screen name="admin" options={{ headerShown: false }} />
-        </Stack.Protected>
-
         <Stack.Protected guard={user.role === "DELIVERYMAN"}>
           <Stack.Screen name="deliveryman" options={{ headerShown: false }} />
         </Stack.Protected>
 
-        <Stack.Protected guard={user.role === "RESTAURANT_OWNER"}>
-          <Stack.Screen name="restaurant" options={{ headerShown: false }} />
+        <Stack.Protected guard={user.role === "ADMIN"}>
+          <Stack.Screen name="admin" options={{ headerShown: false }} />
         </Stack.Protected>
       </Stack>
     );

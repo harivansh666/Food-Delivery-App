@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     email: "rider@gmail.com",
     id: "1",
     name: "Harivansh",
-    role: "DELIVERYMAN",
+    role: "ADMIN",
     createdAt: new Date(),
     updatedAt: new Date(),
   });
