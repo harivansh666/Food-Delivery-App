@@ -15,6 +15,11 @@ export default function AdminHomeScreen() {
         style={styles.createRestaurant}
         href={"/admin/(index)/create-restaurant"}
       />
+
+      <Link
+        style={styles.createRestaurant}
+        href={"/admin/(index)/edit-restaurant"}
+      />
     </View>
   );
 }

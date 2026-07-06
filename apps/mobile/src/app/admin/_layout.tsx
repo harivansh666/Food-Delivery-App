@@ -26,6 +26,12 @@ export default function AdminLayout() {
             ),
           }}
         />
+        <Tabs.Screen
+          name="(index)"
+          options={{
+            href: null,
+          }}
+        />
 
         <Tabs.Screen
           name="index"

@@ -1,5 +1,6 @@
 import { Redirect } from "expo-router";
 import { useAuth } from "@/context/auth-context";
+import { UserRole } from "@food-delivery-app/types";
 
 function Home() {
   const { user, isLoading } = useAuth();
@@ -8,9 +9,11 @@ function Home() {
 
   if (!user) return <Redirect href="/login" />;
 
-  if (user.role === "CUSTOMER") return <Redirect href={"/customer" as any} />;
-  if (user.role === "ADMIN") return <Redirect href={"/admin" as any} />;
-  if (user.role === "DELIVERYMAN")
+  if (user.role === UserRole.CUSTOMER)
+    return <Redirect href={"/customer" as any} />;
+  if (user.role === UserRole.ADMIN || user.role === UserRole.RESTAURANT_OWNER)
+    return <Redirect href={"/admin" as any} />;
+  if (user.role === UserRole.DELIVERYMAN)
     return <Redirect href={"/deliveryman" as any} />;
 
   // Fallback
