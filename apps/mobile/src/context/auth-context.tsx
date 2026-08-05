@@ -60,14 +60,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // login user
   const login = async (email: string, password: string) => {
-    setIsLoading(true);
     try {
       const response = await axiosInstance.post("/auth/login", {
         email,
         password,
       });
-      console.log(email, password);
-      console.log("Login response:", response.data);
+     
 
       const { token: authToken, user: authUser } = response.data.data;
       setUser(authUser);
@@ -78,14 +76,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
 
   // register user
   const register = async (data: RegisterDto) => {
-    setIsLoading(true);
     try {
       const response = await axiosInstance.post("/auth/register", data);
       const { token: authToken, user: authUser } = response.data.data;
@@ -97,8 +92,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
   const logout = async () => {
